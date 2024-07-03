@@ -1,0 +1,26 @@
+<!-- arm_control.launch -->
+<launch>
+  <!-- Start a tf2 static transform publisher -->
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_end_effector_broadcaster"
+        args="0.0 0.0 0.0 1.57 0.0 0.0 /base_link /end_effector " /> -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="end_effector_to_camera_tf" 
+      args="0.000 0.056 -0.003 3.1416 0.000 0.000 /end_effector_link /camera_link" />
+
+  <include file="$(find kinova_vision)/launch/kinova_vision_color_only.launch" />
+  <include file="$(find apriltag_ros)/launch/continuous_detection.launch" />
+      
+      <!-- Argument Declarations -->
+  <arg name="ip" default="192.168.1.10" />
+  <arg name="username" default="admin" />
+  <arg name="password" default="admin" />
+  <arg name="tag_frame" default="tag_3" />
+
+  <!-- Run the arm_control_node.py -->
+  <node name="arm_control_node" pkg="arm_control" type="arm_control_node.py" output="screen" >
+    <param name="ip" value="$(arg ip)" />
+    <param name="username" value="$(arg username)" />
+    <param name="password" value="$(arg password)" />
+  </node>
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/zjw/kinova_vision_ws/src/arm_control/kinova_arm.rviz" required="true" />
+</launch>

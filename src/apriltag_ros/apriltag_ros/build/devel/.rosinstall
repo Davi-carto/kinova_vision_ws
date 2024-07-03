@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/zjw/kinova_vision_ws/src/apriltag_ros/apriltag_ros/build/devel/setup.sh

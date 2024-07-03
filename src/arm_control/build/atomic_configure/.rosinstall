@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/zjw/kinova_vision_ws/src/arm_control/build/devel/setup.sh
